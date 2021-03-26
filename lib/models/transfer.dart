@@ -4,7 +4,7 @@ class TransferModel {
 
   TransferModel(this.account, this.value);
 
-  String getFormattedAccount()=> this.account.toString();
+  String getFormattedAccount() => this.account.toString();
 
-  String getFormattedValue()=> 'R\$ $value';
+  String getFormattedValue() => 'R\$ ${value.toStringAsFixed(2)}';
 }

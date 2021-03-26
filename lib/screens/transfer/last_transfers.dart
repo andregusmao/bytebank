@@ -22,12 +22,15 @@ class LastTransfers extends StatelessWidget {
         ),
         Consumer<TransferListModel>(
           builder: (context, transferList, child) {
+            if (transferList.getCount() == 0) {
+              return NoTransfers();
+            }
             return ListView.builder(
               padding: const EdgeInsets.all(8.0),
-              itemCount: transferList.transferList.length >= 5 ? 5 : transferList.transferList.length,
+              itemCount: transferList.getCount(max: 5),
               shrinkWrap: true,
-              itemBuilder: (context, index){
-                return TransferItem(transferList.transferList[index]);
+              itemBuilder: (context, index) {
+                return TransferItem(transferList.get(index));
               },
             );
           },
@@ -37,12 +40,29 @@ class LastTransfers extends StatelessWidget {
             primary: Colors.green,
             onPrimary: Colors.white,
           ),
-          child: Text('Transferências'),
+          child: Text('Ver todas as tranferências'),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => TransferList()));
           },
         ),
       ],
+    );
+  }
+}
+
+class NoTransfers extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.all(40),
+      child: Padding(
+        padding: EdgeInsets.all(12),
+        child: Text(
+          'Nenhuma transferência cadastrada',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
     );
   }
 }

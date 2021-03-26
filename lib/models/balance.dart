@@ -18,7 +18,5 @@ class BalanceModel extends ChangeNotifier {
   }
 
   @override
-  String toString() {
-    return 'R\$ $value';
-  }
+  String toString() => 'R\$ ${value.toStringAsFixed(2)}';
 }

@@ -16,8 +16,8 @@ class TransferList extends StatelessWidget {
       ),
       body: Consumer<TransferListModel>(builder: (context, transferList, child) {
         return ListView.builder(
-            itemCount: transferList.transferList.length,
-            itemBuilder: (context, index) => TransferItem(transferList.transferList[index]));
+            itemCount: transferList.getCount(),
+            itemBuilder: (context, index) => TransferItem(transferList.get(index)));
       }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

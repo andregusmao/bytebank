@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 class TransferListModel extends ChangeNotifier {
   final List<TransferModel> _transferList = [];
 
-  List<TransferModel> get transferList => _transferList;
+  List<TransferModel> all() => _transferList;
 
-  add(TransferModel transfer) {
+  int getCount({int max}) => max != null && _transferList.length > max ? max : _transferList.length;
+
+  TransferModel get(int index) => _transferList[index];
+
+  void add(TransferModel transfer) {
     _transferList.add(transfer);
 
     notifyListeners();
