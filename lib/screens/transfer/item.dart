@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TransferItem extends StatelessWidget {
-  final Transfer _transfer;
+  final TransferModel _transfer;
 
   TransferItem(this._transfer);
 
@@ -12,10 +12,9 @@ class TransferItem extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: Icon(Icons.monetization_on),
-        title: Text(this._transfer.value.toString()),
-        subtitle: Text(this._transfer.account.toString()),
+        title: Text(this._transfer.getFormattedAccount()),
+        subtitle: Text(this._transfer.getFormattedValue()),
       ),
     );
   }
 }
-

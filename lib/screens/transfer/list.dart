@@ -1,40 +1,29 @@
 import 'package:bytebank/models/transfer.dart';
+import 'package:bytebank/models/transfer_list.dart';
 import 'package:bytebank/screens/transfer/form.dart';
 import 'package:bytebank/screens/transfer/item.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-class TransferList extends StatefulWidget {
-  final List<Transfer> _transferList = [];
-
-  @override
-  State<StatefulWidget> createState() {
-    return TransferListState();
-  }
-}
+import 'package:provider/provider.dart';
 
 const _APP_BAR_TITLE = 'Transferências';
 
-class TransferListState extends State<TransferList> {
+class TransferList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(_APP_BAR_TITLE),
       ),
-      body: ListView.builder(
-          itemCount: widget._transferList.length,
-          itemBuilder: (context, index) => TransferItem(widget._transferList[index])),
+      body: Consumer<TransferListModel>(builder: (context, transferList, child) {
+        return ListView.builder(
+            itemCount: transferList.transferList.length,
+            itemBuilder: (context, index) => TransferItem(transferList.transferList[index]));
+      }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          final Future<Transfer> response =
+          final Future<TransferModel> response =
               Navigator.push(context, MaterialPageRoute(builder: (context) => TransferForm()));
-          response.then((transfer) {
-            if (transfer != null) {
-              setState(() => widget._transferList.add(transfer));
-            }
-          });
         },
       ),
     );

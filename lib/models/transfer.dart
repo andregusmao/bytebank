@@ -1,11 +1,10 @@
-class Transfer {
+class TransferModel {
   final int account;
   final double value;
 
-  Transfer(this.account, this.value);
+  TransferModel(this.account, this.value);
 
-  @override
-  String toString() {
-    return 'Transfer{account: $account, value: $value}';
-  }
+  String getFormattedAccount()=> this.account.toString();
+
+  String getFormattedValue()=> 'R\$ $value';
 }
